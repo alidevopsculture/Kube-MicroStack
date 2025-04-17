@@ -31,6 +31,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/node-docker-app
             docker pull $IMAGE_NAME:latest
             docker stop node-app || true && docker rm node-app || true
             docker run -d -p 80:3000 --name node-app $IMAGE_NAME:latest
